@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="ucb.edu.bo_sa-bi-covid-19_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>ucb.edu.bo.sabicovid19.domain.BiGender</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiDepartment</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiMunicipality</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiProvince</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiRole</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiHistoricalMedicalCondition</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiUser</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiPerson</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiOriginContagion</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiCase</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiMedicalCondition</class>
+    <class>ucb.edu.bo.sabicovid19.domain.BiUserRole</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/database_bi_covid_19"/>
+      <property name="javax.persistence.jdbc.user" value="postgres"/>
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="adam123quiroz"/>
+    </properties>
+  </persistence-unit>
+</persistence>

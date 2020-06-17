@@ -2,10 +2,9 @@ spring:
   application:
     name: sa-bi-covid-19
   datasource:
-    platform: postgres
-    url: jdbc:postgresql://localhost:5432/database_bi_covid_19
-    username: postgres
-    password: adam123quiroz
+    url: jdbc:postgresql://serverucb.postgres.database.azure.com:5432/database_bi_covid_19?ssl=true&sslmode=prefer
+    username: adminBi@serverucb
+    password: Arqui2020
   jpa:
     hibernate:
       ddl-auto: none
@@ -19,7 +18,7 @@ spring:
         jdbc:
           lob:
             non_contextual_creation: true
-    # show-sql: true
+      show-sql: true
 sa-bi-covid-19:
   security:
     salt: qwertyuiop

@@ -16,8 +16,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -41,9 +39,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "BiUser.findByUserId", query = "SELECT b FROM BiUser b WHERE b.userId = :userId"),
     @NamedQuery(name = "BiUser.findByUsername", query = "SELECT b FROM BiUser b WHERE b.username = :username"),
     @NamedQuery(name = "BiUser.findByPassword", query = "SELECT b FROM BiUser b WHERE b.password = :password"),
-    @NamedQuery(name = "BiUser.findByAccountExpired", query = "SELECT b FROM BiUser b WHERE b.accountExpired = :accountExpired"),
-    @NamedQuery(name = "BiUser.findByAccountLocked", query = "SELECT b FROM BiUser b WHERE b.accountLocked = :accountLocked"),
-    @NamedQuery(name = "BiUser.findByCredentialsExpired", query = "SELECT b FROM BiUser b WHERE b.credentialsExpired = :credentialsExpired"),
     @NamedQuery(name = "BiUser.findByStatus", query = "SELECT b FROM BiUser b WHERE b.status = :status"),
     @NamedQuery(name = "BiUser.findByTextUser", query = "SELECT b FROM BiUser b WHERE b.textUser = :textUser"),
     @NamedQuery(name = "BiUser.findByTextHost", query = "SELECT b FROM BiUser b WHERE b.textHost = :textHost"),
@@ -68,18 +63,6 @@ public class BiUser implements Serializable {
     private String password;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "account_expired")
-    private int accountExpired;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "account_locked")
-    private int accountLocked;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "credentials_expired")
-    private int credentialsExpired;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "status")
     private int status;
     @Basic(optional = false)
@@ -97,9 +80,6 @@ public class BiUser implements Serializable {
     @Column(name = "text_date")
     @Temporal(TemporalType.DATE)
     private Date textDate;
-    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private BiPerson personId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId", fetch = FetchType.LAZY)
     private List<BiUserRole> biUserRoleList;
 
@@ -110,13 +90,10 @@ public class BiUser implements Serializable {
         this.userId = userId;
     }
 
-    public BiUser(Integer userId, String username, String password, int accountExpired, int accountLocked, int credentialsExpired, int status, String textUser, String textHost, Date textDate) {
+    public BiUser(Integer userId, String username, String password, int status, String textUser, String textHost, Date textDate) {
         this.userId = userId;
         this.username = username;
         this.password = password;
-        this.accountExpired = accountExpired;
-        this.accountLocked = accountLocked;
-        this.credentialsExpired = credentialsExpired;
         this.status = status;
         this.textUser = textUser;
         this.textHost = textHost;
@@ -145,30 +122,6 @@ public class BiUser implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getAccountExpired() {
-        return accountExpired;
-    }
-
-    public void setAccountExpired(int accountExpired) {
-        this.accountExpired = accountExpired;
-    }
-
-    public int getAccountLocked() {
-        return accountLocked;
-    }
-
-    public void setAccountLocked(int accountLocked) {
-        this.accountLocked = accountLocked;
-    }
-
-    public int getCredentialsExpired() {
-        return credentialsExpired;
-    }
-
-    public void setCredentialsExpired(int credentialsExpired) {
-        this.credentialsExpired = credentialsExpired;
     }
 
     public int getStatus() {
@@ -201,14 +154,6 @@ public class BiUser implements Serializable {
 
     public void setTextDate(Date textDate) {
         this.textDate = textDate;
-    }
-
-    public BiPerson getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(BiPerson personId) {
-        this.personId = personId;
     }
 
     @XmlTransient
@@ -244,5 +189,5 @@ public class BiUser implements Serializable {
     public String toString() {
         return "ucb.edu.bo.sabicovid19.domain.BiUser[ userId=" + userId + " ]";
     }
-
+    
 }

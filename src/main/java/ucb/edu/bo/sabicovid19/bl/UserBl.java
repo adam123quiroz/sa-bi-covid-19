@@ -3,9 +3,8 @@ package ucb.edu.bo.sabicovid19.bl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ucb.edu.bo.sabicovid19.Status;
-import ucb.edu.bo.sabicovid19.domain.BiUser;
 import ucb.edu.bo.sabicovid19.dao.BiUserRepository;
-import ucb.edu.bo.sabicovid19.dto.PersonDto;
+import ucb.edu.bo.sabicovid19.domain.BiUser;
 import ucb.edu.bo.sabicovid19.dto.UserDto;
 
 import java.util.*;
@@ -44,8 +43,6 @@ public class UserBl  {
         List<UserDto> userDtoList = new ArrayList<>();
         this.userRepository.findAllByStatus(Status.ACTIVE.getStatus()).forEach(user -> {
             UserDto userDto = new UserDto(user);
-            PersonDto personDto = new PersonDto(user.getPersonId());
-            userDto.setPersonId(personDto);
             userDtoList.add(userDto);
         });
         return userDtoList;

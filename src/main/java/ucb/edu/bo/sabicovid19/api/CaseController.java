@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ucb.edu.bo.sabicovid19.bl.CaseBl;
-import ucb.edu.bo.sabicovid19.domain.BiCase;
 import ucb.edu.bo.sabicovid19.dto.CaseDto;
 import ucb.edu.bo.sabicovid19.dto.CasePostDto;
 

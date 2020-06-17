@@ -98,7 +98,6 @@ public class CaseBl {
         biCase.setTextHost("localhost");
 
         caseRepository.save(biCase);
-
         return  casePostDto;
     }
 }

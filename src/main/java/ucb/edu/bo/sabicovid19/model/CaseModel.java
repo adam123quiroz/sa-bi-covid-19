@@ -1,11 +1,11 @@
-package ucb.edu.bo.sabicovid19.dto;
+package ucb.edu.bo.sabicovid19.model;
 
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class CasePostDto {
+public class CaseModel {
     private Integer age;
     private Date updateDate;
     private String district;

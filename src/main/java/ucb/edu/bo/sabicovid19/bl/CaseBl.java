@@ -6,6 +6,7 @@ import ucb.edu.bo.sabicovid19.Status;
 import ucb.edu.bo.sabicovid19.dao.*;
 import ucb.edu.bo.sabicovid19.domain.*;
 import ucb.edu.bo.sabicovid19.dto.*;
+import ucb.edu.bo.sabicovid19.model.CaseModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,23 +69,23 @@ public class CaseBl {
 
     /**
      * this method save the new Case with a specific json data structure that
-     * @param casePostDto the format of the json
+     * @param caseModel the format of the json
      * @return return the json if it save
      */
-    public CasePostDto createCase(@org.jetbrains.annotations.NotNull CasePostDto casePostDto) {
+    public CaseModel createCase(@org.jetbrains.annotations.NotNull CaseModel caseModel) {
         BiCase biCase = new BiCase();
-        biCase.setAge(casePostDto.getAge());
-        biCase.setUpdateDate(casePostDto.getUpdateDate());
-        biCase.setDistrict(casePostDto.getDistrict());
-        biCase.setZone(casePostDto.getZone());
+        biCase.setAge(caseModel.getAge());
+        biCase.setUpdateDate(caseModel.getUpdateDate());
+        biCase.setDistrict(caseModel.getDistrict());
+        biCase.setZone(caseModel.getZone());
 
-        BiGender biGender = this.biGenderRepository.findByGenderIdAndStatus(casePostDto.getGanderId(),
+        BiGender biGender = this.biGenderRepository.findByGenderIdAndStatus(caseModel.getGanderId(),
                 Status.ACTIVE.getStatus());
-        BiMedicalCondition biMedicalCondition  = this.biMedicalConditionRepository.findByMedCondIdAndStatus(casePostDto.getMedCondId(),
+        BiMedicalCondition biMedicalCondition  = this.biMedicalConditionRepository.findByMedCondIdAndStatus(caseModel.getMedCondId(),
                 Status.ACTIVE.getStatus());
-        BiMunicipality biMunicipality = this.biMunicipalityRepository.findByMunicipallyIdAndStatus(casePostDto.getMunicipallyId(),
+        BiMunicipality biMunicipality = this.biMunicipalityRepository.findByMunicipallyIdAndStatus(caseModel.getMunicipallyId(),
                 Status.ACTIVE.getStatus());
-        BiOriginContagion biOriginContagion = this.biOriginContagionRepository.findByOriContgIdAndStatus(casePostDto.getOriContgId(),
+        BiOriginContagion biOriginContagion = this.biOriginContagionRepository.findByOriContgIdAndStatus(caseModel.getOriContgId(),
                 Status.ACTIVE.getStatus());
 
         biCase.setGanderId(biGender);
@@ -98,7 +99,7 @@ public class CaseBl {
         biCase.setTextHost("localhost");
 
         caseRepository.save(biCase);
-        return  casePostDto;
+        return caseModel;
     }
 }
 

@@ -54,7 +54,7 @@ public class BiMunicipality implements Serializable {
     private Integer municipallyId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 100)
     @Column(name = "municipally")
     private String municipally;
     @Basic(optional = false)

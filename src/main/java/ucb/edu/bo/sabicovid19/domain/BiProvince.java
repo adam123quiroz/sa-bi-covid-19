@@ -54,7 +54,7 @@ public class BiProvince implements Serializable {
     private Integer provinceId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 100)
     @Column(name = "province")
     private String province;
     @Basic(optional = false)

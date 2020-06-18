@@ -41,7 +41,7 @@ public class SecurityBl {
             return null;
         } else {
             Integer userId = user.getUserId();
-            result.put("authentication", generateJWT(userId, 2, "AUTHN"));
+            result.put("authentication", generateJWT(userId, 30, "AUTHN"));
             result.put("refresh", generateJWT(userId, 6, "REFRESH"));
             return result;
         }

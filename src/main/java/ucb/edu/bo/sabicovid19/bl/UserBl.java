@@ -1,5 +1,6 @@
 package ucb.edu.bo.sabicovid19.bl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import ucb.edu.bo.sabicovid19.Status;
@@ -10,6 +11,7 @@ import ucb.edu.bo.sabicovid19.model.UserModel;
 
 import java.util.*;
 
+@Slf4j
 @Service
 public class UserBl {
     final
@@ -27,10 +29,9 @@ public class UserBl {
      */
     public UserModel createUser(UserModel userModel) {
         BiUser usernameIfExists = this.userRepository.findByUsernameAndStatus(userModel.getUsername(), Status.ACTIVE.getStatus());
+        log.info("Username " + userModel.getUsername());
 
         if (usernameIfExists == null) {
-            return null;
-        } else {
             BiUser user = new BiUser();
             user.setUsername(userModel.getUsername());
             user.setPassword(userModel.getPassword());
@@ -40,8 +41,12 @@ public class UserBl {
             user.setTextHost("localhost");
             user.setTextUser("Admin");
 
+            log.info(user.toString());
+
             this.userRepository.save(user);
             return userModel;
+        } else {
+            return null;
         }
     }
 

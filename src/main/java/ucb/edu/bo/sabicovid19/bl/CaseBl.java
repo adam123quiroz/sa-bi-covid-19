@@ -82,13 +82,17 @@ public class CaseBl {
         biCase.setDistrict(caseModel.getDistrict());
         biCase.setZone(caseModel.getZone());
 
-        BiGender biGender = this.biGenderRepository.findByGenderIdAndStatus(caseModel.getGanderId(),
+        BiGender biGender = this.biGenderRepository.findByGenderIdAndStatus(
+                caseModel.getGanderId(),
                 Status.ACTIVE.getStatus());
-        BiMedicalCondition biMedicalCondition = this.biMedicalConditionRepository.findByMedCondIdAndStatus(caseModel.getMedCondId(),
+        BiMedicalCondition biMedicalCondition = this.biMedicalConditionRepository.findByMedCondIdAndStatus(
+                caseModel.getMedCondId(),
                 Status.ACTIVE.getStatus());
-        BiMunicipality biMunicipality = this.biMunicipalityRepository.findByMunicipallyIdAndStatus(caseModel.getMunicipallyId(),
+        BiMunicipality biMunicipality = this.biMunicipalityRepository.findByMunicipallyIdAndStatus(
+                caseModel.getMunicipallyId(),
                 Status.ACTIVE.getStatus());
-        BiOriginContagion biOriginContagion = this.biOriginContagionRepository.findByOriContgIdAndStatus(caseModel.getOriContgId(),
+        BiOriginContagion biOriginContagion = this.biOriginContagionRepository.findByOriContgIdAndStatus(
+                caseModel.getOriContgId(),
                 Status.ACTIVE.getStatus());
 
         biCase.setGanderId(biGender);
@@ -106,12 +110,21 @@ public class CaseBl {
     }
 
     public Integer countAllByMedCondIdActive(Integer idMedicalConditional) {
-        return this.caseRepository.countAllByMedCondIdAndStatus(this.biMedicalConditionRepository.findByMedCondIdAndStatus(idMedicalConditional, Status.ACTIVE.getStatus()), Status.ACTIVE.getStatus());
+        return this.caseRepository.countAllByMedCondIdAndStatus(
+                this.biMedicalConditionRepository.findByMedCondIdAndStatus(
+                        idMedicalConditional, Status.ACTIVE.getStatus()
+                ),
+                Status.ACTIVE.getStatus()
+        );
     }
 
     public Integer countAllCasesActive() {
-        return this.caseRepository.countAllByMedCondIdNot(this.biMedicalConditionRepository.findByMedCondIdAndStatus(MedicalCondition.Suspect.getStatus(),
-                Status.ACTIVE.getStatus()));
+        return this.caseRepository.countAllByMedCondIdNot(
+                this.biMedicalConditionRepository.findByMedCondIdAndStatus(
+                        MedicalCondition.Suspect.getStatus(),
+                        Status.ACTIVE.getStatus()
+                )
+        );
     }
 
     public Integer countAllCasesToday() {
@@ -120,7 +133,51 @@ public class CaseBl {
 
     public Integer countAllCasesByMedicalConditionToday(Integer idMedicalCondition) {
         return this.caseRepository.countAllByMedCondIdAndUpdateDateAndStatus(
-                this.biMedicalConditionRepository.findByMedCondIdAndStatus(idMedicalCondition, Status.ACTIVE.getStatus()),
+                this.biMedicalConditionRepository.findByMedCondIdAndStatus(
+                        idMedicalCondition, Status.ACTIVE.getStatus()
+                ),
+                new Date(),
+                Status.ACTIVE.getStatus()
+        );
+    }
+
+    public Integer countAllByDepartmentAndMedicalConditionActive(String department,
+                                                                 Integer idMedicalCondition) {
+        return this.caseRepository.countByMunicipallyId_ProvinceId_DepartmentId_DepartmentAndMedCondIdAndStatus(
+                department,
+                this.biMedicalConditionRepository.findByMedCondIdAndStatus(
+                        idMedicalCondition,
+                        Status.ACTIVE.getStatus()
+                ),
+                Status.ACTIVE.getStatus()
+        );
+    }
+
+    public Integer countAllCasesActiveByDepartment(String department) {
+        return this.caseRepository.countByMunicipallyId_ProvinceId_DepartmentId_DepartmentAndMedCondIdNot(
+                department,
+                this.biMedicalConditionRepository.findByMedCondIdAndStatus(
+                        MedicalCondition.Suspect.getStatus(),
+                        Status.ACTIVE.getStatus()
+                )
+
+        );
+    }
+
+    public Integer countAllCasesTodayByDepartment(String department) {
+        return this.caseRepository.countByMunicipallyId_ProvinceId_DepartmentId_DepartmentAndUpdateDate(
+                department,
+                new Date()
+        );
+    }
+
+    public  Integer countAllCasesByMedicalConditionToday(String department) {
+        return this.caseRepository.countByMunicipallyId_ProvinceId_DepartmentId_DepartmentAndMedCondIdAndUpdateDateAndStatus(
+                department,
+                this.biMedicalConditionRepository.findByMedCondIdAndStatus(
+                        MedicalCondition.Death.getStatus(),
+                        Status.ACTIVE.getStatus()
+                ),
                 new Date(),
                 Status.ACTIVE.getStatus()
         );

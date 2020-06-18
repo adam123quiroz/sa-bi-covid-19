@@ -120,6 +120,14 @@
 			<scope>compile</scope>
 		</dependency>
 
+<!--		Telegram Dependency-->
+		<dependency>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegrambots</artifactId>
+			<version>4.9</version>
+		</dependency>
+<!--		Telegram Dependency-->
+
 	</dependencies>
 
 	<dependencyManagement>

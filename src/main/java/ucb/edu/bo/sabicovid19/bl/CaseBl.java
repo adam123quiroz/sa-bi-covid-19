@@ -2,6 +2,7 @@ package ucb.edu.bo.sabicovid19.bl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ucb.edu.bo.sabicovid19.MedicalCondition;
 import ucb.edu.bo.sabicovid19.Status;
 import ucb.edu.bo.sabicovid19.dao.*;
 import ucb.edu.bo.sabicovid19.domain.*;
@@ -23,11 +24,12 @@ public class CaseBl {
 
     /**
      * Constructor, it receives the beans that Spring give us
-     * @param caseRepository BiCaseRepository
-     * @param biGenderRepository BiGenderRepository
+     *
+     * @param caseRepository               BiCaseRepository
+     * @param biGenderRepository           BiGenderRepository
      * @param biMedicalConditionRepository BiMedicalConditionRepository
-     * @param biMunicipalityRepository BiMunicipalityRepository
-     * @param biOriginContagionRepository BiOriginContagionRepository
+     * @param biMunicipalityRepository     BiMunicipalityRepository
+     * @param biOriginContagionRepository  BiOriginContagionRepository
      */
     public CaseBl(BiCaseRepository caseRepository,
                   BiGenderRepository biGenderRepository,
@@ -69,6 +71,7 @@ public class CaseBl {
 
     /**
      * this method save the new Case with a specific json data structure that
+     *
      * @param caseModel the format of the json
      * @return return the json if it save
      */
@@ -81,7 +84,7 @@ public class CaseBl {
 
         BiGender biGender = this.biGenderRepository.findByGenderIdAndStatus(caseModel.getGanderId(),
                 Status.ACTIVE.getStatus());
-        BiMedicalCondition biMedicalCondition  = this.biMedicalConditionRepository.findByMedCondIdAndStatus(caseModel.getMedCondId(),
+        BiMedicalCondition biMedicalCondition = this.biMedicalConditionRepository.findByMedCondIdAndStatus(caseModel.getMedCondId(),
                 Status.ACTIVE.getStatus());
         BiMunicipality biMunicipality = this.biMunicipalityRepository.findByMunicipallyIdAndStatus(caseModel.getMunicipallyId(),
                 Status.ACTIVE.getStatus());
@@ -100,6 +103,27 @@ public class CaseBl {
 
         caseRepository.save(biCase);
         return caseModel;
+    }
+
+    public Integer countAllByMedCondIdActive(Integer idMedicalConditional) {
+        return this.caseRepository.countAllByMedCondIdAndStatus(this.biMedicalConditionRepository.findByMedCondIdAndStatus(idMedicalConditional, Status.ACTIVE.getStatus()), Status.ACTIVE.getStatus());
+    }
+
+    public Integer countAllCasesActive() {
+        return this.caseRepository.countAllByMedCondIdNot(this.biMedicalConditionRepository.findByMedCondIdAndStatus(MedicalCondition.Suspect.getStatus(),
+                Status.ACTIVE.getStatus()));
+    }
+
+    public Integer countAllCasesToday() {
+        return this.caseRepository.countAllByUpdateDate(new Date());
+    }
+
+    public Integer countAllCasesByMedicalConditionToday(Integer idMedicalCondition) {
+        return this.caseRepository.countAllByMedCondIdAndUpdateDateAndStatus(
+                this.biMedicalConditionRepository.findByMedCondIdAndStatus(idMedicalCondition, Status.ACTIVE.getStatus()),
+                new Date(),
+                Status.ACTIVE.getStatus()
+        );
     }
 }
 

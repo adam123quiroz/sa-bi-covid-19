@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.google.common.hash.Hashing;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ucb.edu.bo.sabicovid19.dao.BiUserRepository;
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class SecurityBl {
     final BiUserRepository biUserRepository;
@@ -35,6 +37,7 @@ public class SecurityBl {
         String sha256hex = Hashing.sha256()
                 .hashString(password + salt, StandardCharsets.UTF_8)
                 .toString();
+        log.info("SHA256HEX" + sha256hex);
         BiUser user = biUserRepository.findByUsernameAndPassword(username, password);
 
         if (user == null) {

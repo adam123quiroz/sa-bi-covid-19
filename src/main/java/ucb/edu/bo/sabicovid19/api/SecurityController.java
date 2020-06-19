@@ -32,14 +32,13 @@ public class SecurityController {
             response.put("message", "Authentication OK");
             response.put("authentication", tokens.get("authentication"));
             response.put("refresh", tokens.get("refresh"));
-            return ResponseEntity.ok().headers(responseHeaders).body(response);
             //return new ResponseEntity<>(response, HttpStatus.OK);
         } else {
             response.put("message", "User or password invalid");
             response.put("authentication", "0");
             response.put("refresh", "0");
-            return ResponseEntity.ok().headers(responseHeaders).body(response);
             //return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
         }
+        return ResponseEntity.ok().headers(responseHeaders).body(response);
     }
 }

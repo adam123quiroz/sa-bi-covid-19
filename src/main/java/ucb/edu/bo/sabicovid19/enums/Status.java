@@ -1,4 +1,4 @@
-package ucb.edu.bo.sabicovid19;
+package ucb.edu.bo.sabicovid19.enums;
 
 public enum Status {
     ACTIVE(1), INACTIVE(0);

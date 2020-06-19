@@ -1,11 +1,10 @@
 package ucb.edu.bo.sabicovid19.bot;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ucb.edu.bo.sabicovid19.bl.BotBl;
+import ucb.edu.bo.sabicovid19.bot.bl.BotBl;
 
 import javax.annotation.PostConstruct;
 

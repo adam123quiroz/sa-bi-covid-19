@@ -3,7 +3,7 @@ package ucb.edu.bo.sabicovid19.bl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import ucb.edu.bo.sabicovid19.Status;
+import ucb.edu.bo.sabicovid19.enums.Status;
 import ucb.edu.bo.sabicovid19.dao.BiUserRepository;
 import ucb.edu.bo.sabicovid19.domain.BiUser;
 import ucb.edu.bo.sabicovid19.dto.UserDto;

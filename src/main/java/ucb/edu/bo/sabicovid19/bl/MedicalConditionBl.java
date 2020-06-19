@@ -1,7 +1,7 @@
 package ucb.edu.bo.sabicovid19.bl;
 
 import org.springframework.stereotype.Service;
-import ucb.edu.bo.sabicovid19.Status;
+import ucb.edu.bo.sabicovid19.enums.Status;
 import ucb.edu.bo.sabicovid19.dao.BiMedicalConditionRepository;
 import ucb.edu.bo.sabicovid19.domain.BiMedicalCondition;
 

@@ -2,8 +2,8 @@ package ucb.edu.bo.sabicovid19.bl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ucb.edu.bo.sabicovid19.MedicalCondition;
-import ucb.edu.bo.sabicovid19.Status;
+import ucb.edu.bo.sabicovid19.enums.MedicalCondition;
+import ucb.edu.bo.sabicovid19.enums.Status;
 import ucb.edu.bo.sabicovid19.dao.*;
 import ucb.edu.bo.sabicovid19.domain.*;
 import ucb.edu.bo.sabicovid19.dto.*;

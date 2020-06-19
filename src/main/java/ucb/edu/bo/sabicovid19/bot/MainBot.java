@@ -5,7 +5,7 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ucb.edu.bo.sabicovid19.bl.BotBl;
+import ucb.edu.bo.sabicovid19.bot.bl.BotBl;
 
 import java.util.List;
 

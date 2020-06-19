@@ -37,7 +37,6 @@ public class SecurityBl {
         String sha256hex = Hashing.sha256()
                 .hashString(password + salt, StandardCharsets.UTF_8)
                 .toString();
-        log.info("SHA256HEX" + sha256hex);
         BiUser user = biUserRepository.findByUsernameAndPassword(username, password);
 
         if (user == null) {
